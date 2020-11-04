@@ -1,1 +1,1 @@
-web: python3 enchantee.bot.py
+web: python3 enchantee.bot
