@@ -1,3 +1,4 @@
+import os
 from telegram import ParseMode
 from telegram.ext import (
     Updater, 
@@ -54,6 +55,8 @@ from generics.handlers import (
     handle_youtube,
 )
 from generics.typing_action import send_typing_action 
+
+PORT = int(os.environ.get('PORT', 5000))
 
 @send_typing_action
 def help(update, context):
@@ -154,7 +157,8 @@ def main():
 
     dp.add_handler(conv_handler)
 
-    updater.start_polling()
+    updater.start_webhook(listen="0.0.0.0", port=int(PORT), url_path=BOT_TOKEN)
+    updater.bot.setWebhook('https://doodletelegrambot.herokuapp.com/' + BOT_TOKEN)
 
     updater.idle()
 
